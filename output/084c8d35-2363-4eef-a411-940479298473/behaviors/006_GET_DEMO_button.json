@@ -1,0 +1,9 @@
+{
+  "selector": "text=\"GET DEMO\"",
+  "element_name": "GET DEMO button",
+  "behavior": "unreachable",
+  "error": "Could not hover element: Locator.hover: Timeout 8000ms exceeded.\nCall log:\n  - waiting for locator(\"text=\\\"GET DEMO\\\"\").first\n",
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\011_GET_DEMO_button_before.png",
+  "screenshot_after": null,
+  "element_description": "GET DEMO button"
+}

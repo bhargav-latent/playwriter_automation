@@ -1,0 +1,32 @@
+{
+  "selector": "text=\"Resources\"",
+  "new_elements_count": 10,
+  "revealed_links": [
+    {
+      "text": "Blogs",
+      "href": "/blog"
+    },
+    {
+      "text": "Use Cases",
+      "href": "/comingsoon"
+    },
+    {
+      "text": "Embrace evolution with spiderAI\u2122\n\nLearn more",
+      "href": "/blog/embracing-evolution-with-spider-ai"
+    },
+    {
+      "text": "View all resources",
+      "href": "/blog"
+    }
+  ],
+  "behavior": "dropdown",
+  "new_element_types": [
+    "A",
+    "UL",
+    "LI",
+    "SPAN"
+  ],
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\007_Resources_menu_item_before.png",
+  "screenshot_after": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\008_Resources_menu_item_after.png",
+  "element_description": "Resources menu item"
+}

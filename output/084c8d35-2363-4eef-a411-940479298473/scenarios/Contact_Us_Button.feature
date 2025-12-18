@@ -1,0 +1,18 @@
+Feature: Hover Interaction - Contact Us Button
+  As a user visiting the website
+  I want to see dropdown content when hovering over the Contact Us button
+  So that I can access contact information and navigation links
+
+  @hover @dropdown
+  Scenario: Contact Us button reveals dropdown on hover
+    Given I am on the homepage
+    When I hover over the "Contact Us" button
+    Then a dropdown menu should become visible
+    And I should see the following links:
+      | Link Text | URL |
+      | Home | / |
+      | spiderAI™ | /spiderai |
+      | iHz™ | /ihz |
+      | Facebook | https://www.facebook.com/profile.php?id=100042907616152 |
+      | Instagram | https://www.instagram.com/inside_minto.ai/ |
+      | Twitter | https://x.com/mintoai_iiot?lang=en |

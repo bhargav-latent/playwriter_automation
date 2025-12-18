@@ -1,0 +1,12 @@
+{
+  "selector": "text=\"Explore All Applications\"",
+  "new_elements_count": 7,
+  "revealed_links": [],
+  "behavior": "content_revealed",
+  "new_element_types": [
+    "BUTTON"
+  ],
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\014_Explore_All_Applications_butto_before.png",
+  "screenshot_after": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\015_Explore_All_Applications_butto_after.png",
+  "element_description": "Explore All Applications button"
+}

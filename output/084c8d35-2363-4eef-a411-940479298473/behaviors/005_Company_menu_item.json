@@ -1,0 +1,32 @@
+{
+  "selector": "text=\"Company\"",
+  "new_elements_count": 11,
+  "revealed_links": [
+    {
+      "text": "About us",
+      "href": "/about"
+    },
+    {
+      "text": "Careers",
+      "href": "/careers"
+    },
+    {
+      "text": "Contact",
+      "href": "/contactus"
+    },
+    {
+      "text": "Looking for a new career? Get in touch",
+      "href": "/contactus"
+    }
+  ],
+  "behavior": "dropdown",
+  "new_element_types": [
+    "A",
+    "UL",
+    "LI",
+    "SPAN"
+  ],
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\009_Company_menu_item_before.png",
+  "screenshot_after": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\010_Company_menu_item_after.png",
+  "element_description": "Company menu item"
+}

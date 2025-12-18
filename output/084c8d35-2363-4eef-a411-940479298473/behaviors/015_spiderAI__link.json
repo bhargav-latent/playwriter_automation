@@ -1,0 +1,10 @@
+{
+  "selector": "text=\"spiderAI\u2122\"",
+  "new_elements_count": 0,
+  "revealed_links": [],
+  "behavior": "no_change",
+  "new_element_types": [],
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\024_spiderAI__link_before.png",
+  "screenshot_after": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\025_spiderAI__link_after.png",
+  "element_description": "spiderAI\u2122 link"
+}

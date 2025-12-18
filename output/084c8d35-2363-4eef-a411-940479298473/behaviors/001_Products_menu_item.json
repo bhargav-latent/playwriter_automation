@@ -1,0 +1,24 @@
+{
+  "selector": "text=\"Products\"",
+  "new_elements_count": 8,
+  "revealed_links": [
+    {
+      "text": "iHz\u2122 - IoT system for Electrical Signature analysi",
+      "href": "/ihz"
+    },
+    {
+      "text": "spiderAI\u2122 - Operational intelligence platform for ",
+      "href": "/spiderai"
+    }
+  ],
+  "behavior": "dropdown",
+  "new_element_types": [
+    "A",
+    "UL",
+    "LI",
+    "SPAN"
+  ],
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\001_Products_menu_item_before.png",
+  "screenshot_after": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\002_Products_menu_item_after.png",
+  "element_description": "Products menu item"
+}

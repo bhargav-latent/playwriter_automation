@@ -1,0 +1,56 @@
+{
+  "selector": "text=\"Facebook\"",
+  "new_elements_count": 23,
+  "revealed_links": [
+    {
+      "text": "Home",
+      "href": "/"
+    },
+    {
+      "text": "spiderAI\u2122",
+      "href": "/spiderai"
+    },
+    {
+      "text": "iHz\u2122",
+      "href": "/ihz"
+    },
+    {
+      "text": "About",
+      "href": "/about"
+    },
+    {
+      "text": "Blog",
+      "href": "/blog"
+    },
+    {
+      "text": "Contact Us",
+      "href": "/contactus"
+    },
+    {
+      "text": "Facebook",
+      "href": "https://www.facebook.com/profile.php?id=100042907616152"
+    },
+    {
+      "text": "Instagram",
+      "href": "https://www.instagram.com/inside_minto.ai/"
+    },
+    {
+      "text": "Twitter",
+      "href": "https://x.com/mintoai_iiot?lang=en"
+    },
+    {
+      "text": "LinkedIn",
+      "href": "https://in.linkedin.com/company/mintoai"
+    }
+  ],
+  "behavior": "dropdown",
+  "new_element_types": [
+    "A",
+    "UL",
+    "LI",
+    "BUTTON"
+  ],
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\034_Facebook_link_before.png",
+  "screenshot_after": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\035_Facebook_link_after.png",
+  "element_description": "Facebook link"
+}

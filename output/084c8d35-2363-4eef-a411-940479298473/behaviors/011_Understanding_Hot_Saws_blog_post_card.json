@@ -1,0 +1,9 @@
+{
+  "selector": "text=\"Understanding Hot Saws Beyond Traditional Monitori\"",
+  "element_name": "Understanding Hot Saws blog post card",
+  "behavior": "unreachable",
+  "error": "Could not hover element: Locator.hover: Timeout 8000ms exceeded.\nCall log:\n  - waiting for locator(\"text=\\\"Understanding Hot Saws Beyond Traditional Monitori\\\"\").first\n",
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\018_Understanding_Hot_Saws_blog_po_before.png",
+  "screenshot_after": null,
+  "element_description": "Understanding Hot Saws blog post card"
+}

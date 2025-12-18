@@ -1,0 +1,9 @@
+{
+  "selector": "text=\"iHz\u2122 - IoT system for Electrical Signature analysi\"",
+  "element_name": "iHz\u2122 product card",
+  "behavior": "unreachable",
+  "error": "Could not hover element: Locator.hover: Timeout 8000ms exceeded.\nCall log:\n  - waiting for locator(\"text=\\\"iHz\u2122 - IoT system for Electrical Signature analysi\\\"\").first\n",
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\017_iHz__product_card_before.png",
+  "screenshot_after": null,
+  "element_description": "iHz\u2122 product card"
+}

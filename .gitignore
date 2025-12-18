@@ -40,6 +40,8 @@ ENV/
 
 # Output (keep structure, ignore session data)
 output/*/
+# But include the example report
+!output/084c8d35-2363-4eef-a411-940479298473/
 
 # Logs
 *.log

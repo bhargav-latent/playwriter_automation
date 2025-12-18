@@ -1,0 +1,9 @@
+{
+  "selector": "text=\"The Vibro Motor Challenge - Monitor Where Vibratio\"",
+  "element_name": "The Vibro Motor Challenge blog post card",
+  "behavior": "unreachable",
+  "error": "Could not hover element: Locator.hover: Timeout 8000ms exceeded.\nCall log:\n  - waiting for locator(\"text=\\\"The Vibro Motor Challenge - Monitor Where Vibratio\\\"\").first\n",
+  "screenshot_before": "output\\084c8d35-2363-4eef-a411-940479298473\\screenshots\\019_The_Vibro_Motor_Challenge_blog_before.png",
+  "screenshot_after": null,
+  "element_description": "The Vibro Motor Challenge blog post card"
+}
