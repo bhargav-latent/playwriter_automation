@@ -1,0 +1,9 @@
+{
+  "selector": "button:nth-of-type(22)",
+  "element_name": "Click to expand What to Expect menu",
+  "behavior": "unreachable",
+  "error": "Could not hover element: Locator.hover: Timeout 8000ms exceeded.\nCall log:\n  - waiting for locator(\"button:nth-of-type(22)\").first\n",
+  "screenshot_before": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\004_Click_to_expand_What_to_Expect_before.png",
+  "screenshot_after": null,
+  "element_description": "Click to expand What to Expect menu"
+}

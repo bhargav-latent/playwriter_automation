@@ -1,0 +1,23 @@
+{
+  "selector": "button.carrot_down",
+  "new_elements_count": 6,
+  "revealed_links": [
+    {
+      "text": "Tivdak and You",
+      "href": "/about-tivdak/"
+    },
+    {
+      "text": "What Is Tivdak?",
+      "href": "/about-tivdak/"
+    }
+  ],
+  "behavior": "dropdown",
+  "new_element_types": [
+    "A",
+    "LI",
+    "UL"
+  ],
+  "screenshot_before": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\001_Click_to_expand_About_Tivdak_m_before.png",
+  "screenshot_after": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\002_Click_to_expand_About_Tivdak_m_after.png",
+  "element_description": "Click to expand About Tivdak menu"
+}

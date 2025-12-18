@@ -1,0 +1,10 @@
+{
+  "selector": "#util_hcp",
+  "new_elements_count": 0,
+  "revealed_links": [],
+  "behavior": "no_change",
+  "new_element_types": [],
+  "screenshot_before": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\018_US_Healthcare_Professionals_li_before.png",
+  "screenshot_after": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\019_US_Healthcare_Professionals_li_after.png",
+  "element_description": "US Healthcare Professionals link"
+}

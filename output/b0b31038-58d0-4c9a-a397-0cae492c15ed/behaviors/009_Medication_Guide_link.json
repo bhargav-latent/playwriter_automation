@@ -1,0 +1,10 @@
+{
+  "selector": "#util_mg",
+  "new_elements_count": 0,
+  "revealed_links": [],
+  "behavior": "no_change",
+  "new_element_types": [],
+  "screenshot_before": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\014_Medication_Guide_link_before.png",
+  "screenshot_after": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\015_Medication_Guide_link_after.png",
+  "element_description": "Medication Guide link"
+}

@@ -1,0 +1,43 @@
+{
+  "selector": "text=\"Sitemap\"",
+  "new_elements_count": 26,
+  "revealed_links": [
+    {
+      "text": "1-800-FDA-1088",
+      "href": "tel:1-800-332-1088"
+    },
+    {
+      "text": "full Prescribing Information",
+      "href": "https://labeling.pfizer.com/ShowLabeling.aspx?id=20632"
+    },
+    {
+      "text": "Medication Guide",
+      "href": "https://labeling.pfizer.com/ShowLabeling.aspx?id=20632&Section=MedGuide"
+    },
+    {
+      "text": "Terms of Use",
+      "href": "https://webfiles.pfizer.com/Seagen_Terms_and_Conditions.pdf"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "\t\n                            https://webfiles.pfizer.com/Seagen_Privacy_Policy.pdf"
+    },
+    {
+      "text": "Sitemap",
+      "href": "/sitemap/"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.pfizer.com/contact"
+    }
+  ],
+  "behavior": "dropdown",
+  "new_element_types": [
+    "UL",
+    "A",
+    "LI"
+  ],
+  "screenshot_before": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\038_Sitemap_link_before.png",
+  "screenshot_after": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\039_Sitemap_link_after.png",
+  "element_description": "Sitemap link"
+}

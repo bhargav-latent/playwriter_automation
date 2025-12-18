@@ -1,0 +1,25 @@
+{
+  "selector": "text=\"1-844-747-1620\"",
+  "new_elements_count": 3,
+  "revealed_links": [
+    {
+      "text": "Learn More",
+      "href": "https://alishasjourney.com/"
+    },
+    {
+      "text": "1-844-747-1620",
+      "href": "tel:18447471620"
+    },
+    {
+      "text": "myjourney@mypatientstory.com",
+      "href": "mailto:myjourney@mypatientstory.com"
+    }
+  ],
+  "behavior": "dropdown",
+  "new_element_types": [
+    "A"
+  ],
+  "screenshot_before": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\022_Phone_number_link_before.png",
+  "screenshot_after": "output\\b0b31038-58d0-4c9a-a397-0cae492c15ed\\screenshots\\023_Phone_number_link_after.png",
+  "element_description": "Phone number link"
+}
