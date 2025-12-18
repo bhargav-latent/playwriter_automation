@@ -166,7 +166,7 @@ async def save_gherkin_scenario(element_name: str, gherkin_content: str) -> str:
 
 
 @tool
-async def hover_element(selector: str, description: str, capture_screenshots: bool = True) -> str:
+async def hover_element(selector: str, description: str, capture_screenshots: bool = True, force: bool = False) -> str:
     """
     Hover over an element and detect what changes. Captures before/after screenshots by default.
     Automatically saves behavior data to disk for report generation.
@@ -178,6 +178,8 @@ async def hover_element(selector: str, description: str, capture_screenshots: bo
         selector: CSS selector or text selector for the element
         description: Human-readable description of the element
         capture_screenshots: Whether to capture before/after screenshots (default: True)
+        force: If True, force the hover even if another element intercepts it (default: False).
+               Use this when normal hover fails with "intercepts pointer events" error.
 
     Returns:
         JSON string with detected behavior and screenshot paths
@@ -186,7 +188,7 @@ async def hover_element(selector: str, description: str, capture_screenshots: bo
         from .browser import get_browser_manager
         session_id = get_session_id()
         manager = await get_browser_manager(session_id=session_id)
-        return await manager.hover_and_detect(selector, element_name=description, capture_screenshots=capture_screenshots)
+        return await manager.hover_and_detect(selector, element_name=description, capture_screenshots=capture_screenshots, force=force)
 
     async def _save_behavior(behavior_data: dict):
         from .browser import get_browser_manager

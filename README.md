@@ -464,4 +464,21 @@ This will detect:
 
 ---
 
+## Demo Video
+
+Watch the agent in action analyzing apple.com/in:
+
+https://github.com/user-attachments/assets/playwriter-assignement-bhargava_QAzpq0ri.mp4
+
+[Download Demo Video](playwriter-assignement-bhargava_QAzpq0ri.mp4)
+
+**What you'll see:**
+- Agent navigating to apple.com/in
+- Automatic detection of hoverable elements
+- Before/after screenshot capture for each interaction
+- Gherkin scenario generation for dropdown menus
+- Final report generation with TLDR summary
+
+---
+
 Built by Bhargav with [Claude Code](https://claude.com/claude-code)

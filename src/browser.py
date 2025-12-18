@@ -442,7 +442,7 @@ class BrowserManager:
         loop = asyncio.get_event_loop()
         return await loop.run_in_executor(_executor, self._find_hoverable_elements_sync)
 
-    def _hover_and_detect_sync(self, selector: str, element_name: str, capture_screenshots: bool) -> dict:
+    def _hover_and_detect_sync(self, selector: str, element_name: str, capture_screenshots: bool, force: bool = False) -> dict:
         """Hover and detect changes (sync, runs in thread)."""
         page = self._session.page
 
@@ -545,16 +545,70 @@ class BrowserManager:
                     pass
 
             # Now try to hover with increased timeout
-            try:
-                page.hover(selector, timeout=8000)
-                hover_success = True
-            except Exception as e:
-                # Try with locator.first if direct selector fails
+            # If force=True, skip normal hover and go straight to force hover
+            if force:
+                _logger.info(f"Using force hover for: {selector}")
                 try:
-                    page.locator(selector).first.hover(timeout=8000)
+                    page.locator(selector).first.hover(timeout=8000, force=True)
                     hover_success = True
-                except Exception as e2:
-                    hover_error = str(e2)
+                    _logger.info(f"Force hover succeeded")
+                except Exception as e:
+                    hover_error = str(e)
+            else:
+                try:
+                    page.hover(selector, timeout=8000)
+                    hover_success = True
+                except Exception as e:
+                    error_str = str(e)
+
+                    # Check if another element intercepted the hover
+                    # Error format: "<a href=...> from <li ...> subtree intercepts pointer events"
+                    if "intercepts pointer events" in error_str:
+                        _logger.info(f"Element interception detected, trying to extract intercepting element")
+
+                        # Try to extract and hover the intercepting element
+                        # The error contains the intercepting element's HTML
+                        import re
+
+                        # Extract tag name and attributes from the error
+                        # Pattern matches: <tagname attr="value" ...>
+                        intercept_match = re.search(r'<(\w+)\s+[^>]*(?:href="([^"]*)")?[^>]*(?:aria-label="([^"]*)")?[^>]*>', error_str)
+
+                        if intercept_match:
+                            tag = intercept_match.group(1)
+                            href = intercept_match.group(2)
+                            aria_label = intercept_match.group(3)
+
+                            # Build a selector for the intercepting element
+                            intercept_selector = None
+                            if href:
+                                intercept_selector = f'{tag}[href="{href}"]'
+                            elif aria_label:
+                                intercept_selector = f'{tag}[aria-label="{aria_label}"]'
+
+                            if intercept_selector:
+                                _logger.info(f"Trying to hover intercepting element: {intercept_selector}")
+                                try:
+                                    page.hover(intercept_selector, timeout=5000)
+                                    hover_success = True
+                                    _logger.info(f"Successfully hovered intercepting element")
+                                except Exception as e3:
+                                    _logger.warning(f"Failed to hover intercepting element: {e3}")
+
+                    # If still not successful, try with locator.first
+                    if not hover_success:
+                        try:
+                            page.locator(selector).first.hover(timeout=8000)
+                            hover_success = True
+                        except Exception as e2:
+                            # Last resort: try with force=True to bypass actionability checks
+                            try:
+                                _logger.info(f"Trying force hover as last resort")
+                                page.locator(selector).first.hover(timeout=5000, force=True)
+                                hover_success = True
+                                _logger.info(f"Force hover succeeded")
+                            except Exception as e3:
+                                hover_error = str(e2)
 
             if not hover_success:
                 return {
@@ -639,7 +693,7 @@ class BrowserManager:
 
             return result
 
-    async def hover_and_detect(self, selector: str, element_name: str = "", capture_screenshots: bool = True) -> dict:
+    async def hover_and_detect(self, selector: str, element_name: str = "", capture_screenshots: bool = True, force: bool = False) -> dict:
         """
         Hover over element and detect DOM changes.
 
@@ -647,6 +701,7 @@ class BrowserManager:
             selector: CSS selector or text selector for the element
             element_name: Human-readable name for screenshot filenames
             capture_screenshots: Whether to capture before/after screenshots
+            force: If True, bypass actionability checks (use when element interception occurs)
 
         Returns:
             dict with keys: selector, dom_changed, new_elements, behavior, revealed_links,
@@ -656,7 +711,7 @@ class BrowserManager:
         loop = asyncio.get_event_loop()
         return await loop.run_in_executor(
             _executor,
-            partial(self._hover_and_detect_sync, selector, element_name, capture_screenshots)
+            partial(self._hover_and_detect_sync, selector, element_name, capture_screenshots, force)
         )
 
 

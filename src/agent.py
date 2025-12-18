@@ -291,8 +291,8 @@ def create_graph():
     return workflow.compile()
 
 
-# Export the graph for LangGraph CLI with recursion limit set to 200
-graph = create_graph().with_config({"recursion_limit": 200})
+# Export the graph for LangGraph CLI with recursion limit set to 500
+graph = create_graph().with_config({"recursion_limit": 500})
 
 
 async def run_agent(url: str) -> str:
@@ -312,7 +312,7 @@ async def run_agent(url: str) -> str:
             ]
         }
 
-        final_state = await graph.ainvoke(initial_state, {"recursion_limit": 200})
+        final_state = await graph.ainvoke(initial_state, {"recursion_limit": 500})
 
         # Get the last AI message
         for msg in reversed(final_state["messages"]):
