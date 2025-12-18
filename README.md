@@ -428,9 +428,6 @@ Website:
 | **Qwen3-VL-30B** | Vision-language model for decision making |
 | **Pydantic** | Data validation and settings |
 
-## License
-
-MIT
 
 ---
 
