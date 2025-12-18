@@ -12,6 +12,8 @@ import logging
 from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass
+from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
@@ -31,6 +33,15 @@ class BrowserSession:
     def is_active(self) -> bool:
         """Check if session is active."""
         return self.page is not None and not self.page.is_closed()
+
+
+# Thread pool for running sync Playwright operations
+_executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="playwright")
+
+
+def _run_in_thread(func, *args, **kwargs):
+    """Run a sync function in the playwright thread."""
+    return _executor.submit(func, *args, **kwargs).result()
 
 
 class BrowserManager:
@@ -69,13 +80,13 @@ class BrowserManager:
         """Create a new browser session (sync, runs in thread)."""
         _logger.info(f"_create_session_sync called, platform={sys.platform}")
 
-        # CRITICAL: Clear the running loop reference to avoid Playwright's async detection
-        # Playwright checks asyncio._get_running_loop() and throws an error if it finds one
-        try:
-            # This removes the running loop from this thread's context
-            asyncio.set_event_loop(None)
-        except Exception:
-            pass
+        # On Windows, ensure ProactorEventLoop policy for this thread
+        if sys.platform == "win32":
+            _logger.info("Setting ProactorEventLoop policy in thread")
+            asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+            # Create a new event loop for this thread with ProactorEventLoop
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
 
         _logger.info("Starting sync_playwright")
         self._session.playwright = sync_playwright().start()
@@ -97,12 +108,14 @@ class BrowserManager:
     async def get_page(self) -> Page:
         """Get the current page, creating browser if needed."""
         if not self._session.is_active():
-            await asyncio.to_thread(self._create_session_sync)
+            loop = asyncio.get_event_loop()
+            await loop.run_in_executor(_executor, self._create_session_sync)
         return self._session.page
 
     async def close(self) -> None:
         """Close browser and cleanup resources."""
-        await asyncio.to_thread(self._close_sync)
+        loop = asyncio.get_event_loop()
+        await loop.run_in_executor(_executor, self._close_sync)
 
     def _navigate_sync(self, url: str) -> str:
         """Navigate to URL (sync, runs in thread)."""
@@ -112,7 +125,8 @@ class BrowserManager:
     async def navigate(self, url: str) -> str:
         """Navigate to URL and return page title."""
         await self.get_page()  # Ensure session exists
-        return await asyncio.to_thread(self._navigate_sync, url)
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(_executor, self._navigate_sync, url)
 
     def _take_screenshot_sync(self, name: str, full_page: bool = False) -> str:
         """Take screenshot (sync, runs in thread)."""
@@ -136,7 +150,10 @@ class BrowserManager:
             Path to the saved screenshot file
         """
         await self.get_page()  # Ensure session exists
-        return await asyncio.to_thread(self._take_screenshot_sync, name, full_page)
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(
+            _executor, partial(self._take_screenshot_sync, name, full_page)
+        )
 
     def save_scenario_file(self, element_name: str, gherkin_content: str) -> str:
         """
@@ -183,7 +200,8 @@ class BrowserManager:
     async def get_snapshot(self) -> dict:
         """Get accessibility snapshot of current page."""
         await self.get_page()
-        return await asyncio.to_thread(self._get_snapshot_sync)
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(_executor, self._get_snapshot_sync)
 
     def _get_page_structure_sync(self) -> dict:
         """Get page structure (sync, runs in thread)."""
@@ -366,7 +384,8 @@ class BrowserManager:
         Returns interactive elements, their roles, and hierarchy.
         """
         await self.get_page()
-        return await asyncio.to_thread(self._get_page_structure_sync)
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(_executor, self._get_page_structure_sync)
 
     def _find_hoverable_elements_sync(self) -> list:
         """Find hoverable elements (sync, runs in thread)."""
@@ -420,7 +439,8 @@ class BrowserManager:
     async def find_hoverable_elements(self) -> list:
         """Find all potentially hoverable elements."""
         await self.get_page()
-        return await asyncio.to_thread(self._find_hoverable_elements_sync)
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(_executor, self._find_hoverable_elements_sync)
 
     def _hover_and_detect_sync(self, selector: str, element_name: str, capture_screenshots: bool) -> dict:
         """Hover and detect changes (sync, runs in thread)."""
@@ -633,8 +653,10 @@ class BrowserManager:
                            and optionally screenshot_before, screenshot_after
         """
         await self.get_page()
-        return await asyncio.to_thread(
-            self._hover_and_detect_sync, selector, element_name, capture_screenshots
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(
+            _executor,
+            partial(self._hover_and_detect_sync, selector, element_name, capture_screenshots)
         )
 
 

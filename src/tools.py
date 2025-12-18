@@ -2,14 +2,15 @@
 Custom LangChain tools for hover detection.
 These tools use the persistent BrowserManager session.
 
-Browser operations use sync Playwright API wrapped with asyncio.to_thread() in browser.py
-to avoid event loop conflicts with LangGraph server.
+Uses synchronous tools to avoid event loop conflicts with LangGraph server on Windows.
 """
 
 import json
 import logging
+import asyncio
 from pathlib import Path
 from typing import List, Optional
+from concurrent.futures import ThreadPoolExecutor
 from langchain_core.tools import tool
 
 _logger = logging.getLogger("tools")
@@ -29,6 +30,44 @@ def get_session_id() -> Optional[str]:
     """Get the current session ID."""
     return _current_session_id
 
+# Thread pool for running async browser operations
+_browser_executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="browser_tool")
+
+
+def _run_async_in_thread_sync(coro):
+    """Run an async coroutine in a separate thread with ProactorEventLoop on Windows (sync version)."""
+    import sys
+
+    def run():
+        if sys.platform == "win32":
+            asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(coro)
+        finally:
+            loop.close()
+
+    future = _browser_executor.submit(run)
+    return future.result()
+
+
+async def _run_async_in_thread(coro):
+    """Run an async coroutine in a separate thread with ProactorEventLoop on Windows (async version)."""
+    import sys
+
+    def run():
+        if sys.platform == "win32":
+            asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(coro)
+        finally:
+            loop.close()
+
+    return await asyncio.to_thread(run)
+
 
 @tool
 async def navigate_to_url(url: str) -> str:
@@ -41,14 +80,17 @@ async def navigate_to_url(url: str) -> str:
     Returns:
         String with navigation result and page title
     """
-    from .browser import get_browser_manager
-
     _logger.info(f"navigate_to_url called with url={url}")
 
-    try:
+    async def _navigate():
+        from .browser import get_browser_manager
         session_id = get_session_id()
         manager = await get_browser_manager(session_id=session_id)
         title = await manager.navigate(url)
+        return title
+
+    try:
+        title = await _run_async_in_thread(_navigate())
         _logger.info(f"Navigation successful, title={title}")
         return f"Navigated to {url}. Page title: {title}"
     except Exception as e:
@@ -71,11 +113,13 @@ async def get_page_structure() -> str:
         - hover_candidates: elements likely to have hover behavior (aria-haspopup, cursor:pointer, etc.)
         - landmarks: page regions (navigation, banner, main, etc.)
     """
-    from .browser import get_browser_manager
+    async def _get_structure():
+        from .browser import get_browser_manager
+        session_id = get_session_id()
+        manager = await get_browser_manager(session_id=session_id)
+        return await manager.get_page_structure()
 
-    session_id = get_session_id()
-    manager = await get_browser_manager(session_id=session_id)
-    structure = await manager.get_page_structure()
+    structure = await _run_async_in_thread(_get_structure())
     return json.dumps(structure, indent=2)
 
 
@@ -88,11 +132,13 @@ async def find_hoverable_elements() -> str:
     Returns:
         JSON string of hoverable elements with selectors
     """
-    from .browser import get_browser_manager
+    async def _find():
+        from .browser import get_browser_manager
+        session_id = get_session_id()
+        manager = await get_browser_manager(session_id=session_id)
+        return await manager.find_hoverable_elements()
 
-    session_id = get_session_id()
-    manager = await get_browser_manager(session_id=session_id)
-    elements = await manager.find_hoverable_elements()
+    elements = await _run_async_in_thread(_find())
     return json.dumps(elements, indent=2)
 
 
@@ -109,11 +155,13 @@ async def save_gherkin_scenario(element_name: str, gherkin_content: str) -> str:
     Returns:
         Path to the saved .feature file
     """
-    from .browser import get_browser_manager
+    async def _save():
+        from .browser import get_browser_manager
+        session_id = get_session_id()
+        manager = await get_browser_manager(session_id=session_id)
+        return manager.save_scenario_file(element_name, gherkin_content)
 
-    session_id = get_session_id()
-    manager = await get_browser_manager(session_id=session_id)
-    filepath = manager.save_scenario_file(element_name, gherkin_content)
+    filepath = await _run_async_in_thread(_save())
     return f"Saved Gherkin scenario to: {filepath}"
 
 
@@ -134,15 +182,23 @@ async def hover_element(selector: str, description: str, capture_screenshots: bo
     Returns:
         JSON string with detected behavior and screenshot paths
     """
-    from .browser import get_browser_manager
+    async def _hover():
+        from .browser import get_browser_manager
+        session_id = get_session_id()
+        manager = await get_browser_manager(session_id=session_id)
+        return await manager.hover_and_detect(selector, element_name=description, capture_screenshots=capture_screenshots)
 
-    session_id = get_session_id()
-    manager = await get_browser_manager(session_id=session_id)
-    result = await manager.hover_and_detect(selector, element_name=description, capture_screenshots=capture_screenshots)
+    async def _save_behavior(behavior_data: dict):
+        from .browser import get_browser_manager
+        session_id = get_session_id()
+        manager = await get_browser_manager(session_id=session_id)
+        return manager.save_behavior_file(description, behavior_data)
+
+    result = await _run_async_in_thread(_hover())
     result["element_description"] = description
 
     # Automatically save behavior to disk for report generation
-    behavior_file = manager.save_behavior_file(description, result)
+    behavior_file = await _run_async_in_thread(_save_behavior(result))
     result["behavior_file"] = behavior_file
     _logger.info(f"Saved behavior to: {behavior_file}")
 
