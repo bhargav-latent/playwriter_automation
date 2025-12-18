@@ -466,9 +466,7 @@ This will detect:
 
 ## Demo Video
 
-Watch the agent in action analyzing apple.com/in:
-
-https://github.com/user-attachments/assets/playwriter-assignement-bhargava_QAzpq0ri.mp4
+Watch the agent in action:
 
 [Download Demo Video](playwriter-assignement-bhargava_QAzpq0ri.mp4)
 
