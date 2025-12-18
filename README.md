@@ -14,7 +14,7 @@ Run the agent on any website and receive a complete test report with:
 | `scenarios/*.feature` | Individual Gherkin test files |
 | `behaviors/*.json` | Raw behavior data for analysis |
 
-> **See it in action:** [Example minto.ai report](output/084c8d35-2363-4eef-a411-940479298473/) | [View LangSmith Trace](https://smith.langchain.com/public/c36b3047-4370-4fe2-912e-b48dd91b9938/r)
+> **See it in action:** [Full Report](output/084c8d35-2363-4eef-a411-940479298473/hover_report.md) | [Executive Summary (TLDR)](output/084c8d35-2363-4eef-a411-940479298473/tldr.md) | [LangSmith Trace](https://smith.langchain.com/public/c36b3047-4370-4fe2-912e-b48dd91b9938/r)
 
 ### Screenshot Evidence
 
