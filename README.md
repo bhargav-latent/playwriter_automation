@@ -431,3 +431,7 @@ Website:
 ## License
 
 MIT
+
+---
+
+Built by Bhargav with [Claude Code](https://claude.com/claude-code)
