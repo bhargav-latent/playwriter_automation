@@ -414,6 +414,39 @@ Website:
 
 ---
 
+## Future Enhancements
+
+| Feature | Description | Status |
+|---------|-------------|--------|
+| **Popup/Modal Detection** | Click-triggered dialogs, confirmation popups, and overlay modals | Planned |
+| **Form Interaction Testing** | Input fields, dropdowns, and form submission flows | Planned |
+| **Multi-page Navigation** | Follow links and test hover interactions across pages | Planned |
+| **Accessibility Compliance** | WCAG hover interaction requirements validation | Planned |
+
+### Popup Detection (Planned)
+
+The current implementation focuses on **hover-triggered** interactions. Future versions will add support for **click-triggered** popups:
+
+```gherkin
+# Example: Click-triggered popup scenario
+Feature: Validate popup functionality
+
+  Scenario: External link confirmation popup
+    Given the user is on the page
+    When the user clicks the "Learn More" button
+    Then a popup should appear with title "You are now leaving site.com"
+    And the user clicks "Cancel"
+    Then the popup should close
+```
+
+This will detect:
+- Confirmation dialogs
+- Cookie consent popups
+- External link warnings
+- Modal overlays with action buttons
+
+---
+
 ## Technologies
 
 | Technology | Purpose |
