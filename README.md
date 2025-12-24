@@ -466,8 +466,16 @@ This will detect:
 
 ## Demo Video
 
-[Download Demo Video](playwriter-assignement-bhargava_QAzpq0ri.mp4)
+**Watch the full demo with audio narration:**
+
+[Download Demo Video (with Audio)](ElevenLabs_playwriter-automation_audio_included.mp4)
+
+| Video | Description |
+|-------|-------------|
+| [Demo with Audio](ElevenLabs_playwriter-automation_audio_included.mp4) | Full walkthrough with voice narration |
+| [Quick Demo (4x speed)](playwriter-assignement-bhargava_QAzpq0ri.mp4) | Fast-paced UI recording |
 
 ---
 
 Built by Bhargav with [Claude Code](https://claude.com/claude-code)
+
