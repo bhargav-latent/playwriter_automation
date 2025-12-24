@@ -1,0 +1,10 @@
+{
+  "selector": "#isi_more",
+  "new_elements_count": 0,
+  "revealed_links": [],
+  "behavior": "no_change",
+  "new_element_types": [],
+  "screenshot_before": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\006_Read_More_button_for_Important_before.png",
+  "screenshot_after": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\007_Read_More_button_for_Important_after.png",
+  "element_description": "Read More button for Important Safety Information"
+}

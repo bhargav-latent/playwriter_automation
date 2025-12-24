@@ -1,0 +1,9 @@
+{
+  "selector": "text=\"Click to expand Results menu\"",
+  "element_name": "Click to expand Results menu",
+  "behavior": "unreachable",
+  "error": "Could not hover element: Locator.hover: Timeout 8000ms exceeded.\nCall log:\n  - waiting for locator(\"text=\\\"Click to expand Results menu\\\"\").first\n",
+  "screenshot_before": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\003_Click_to_expand_Results_menu_before.png",
+  "screenshot_after": null,
+  "element_description": "Click to expand Results menu"
+}

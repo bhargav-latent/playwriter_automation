@@ -1,0 +1,9 @@
+{
+  "selector": "text=\"Click to expand Support menu\"",
+  "element_name": "Click to expand Support menu",
+  "behavior": "unreachable",
+  "error": "Could not hover element: Locator.hover: Timeout 8000ms exceeded.\nCall log:\n  - waiting for locator(\"text=\\\"Click to expand Support menu\\\"\").first\n",
+  "screenshot_before": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\005_Click_to_expand_Support_menu_before.png",
+  "screenshot_after": null,
+  "element_description": "Click to expand Support menu"
+}

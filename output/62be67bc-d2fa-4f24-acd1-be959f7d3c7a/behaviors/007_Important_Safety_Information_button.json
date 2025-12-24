@@ -1,0 +1,10 @@
+{
+  "selector": "#util_isi",
+  "new_elements_count": 0,
+  "revealed_links": [],
+  "behavior": "no_change",
+  "new_element_types": [],
+  "screenshot_before": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\010_Important_Safety_Information_b_before.png",
+  "screenshot_after": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\011_Important_Safety_Information_b_after.png",
+  "element_description": "Important Safety Information button"
+}

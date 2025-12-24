@@ -1,0 +1,10 @@
+{
+  "selector": "#util_indi",
+  "new_elements_count": 0,
+  "revealed_links": [],
+  "behavior": "no_change",
+  "new_element_types": [],
+  "screenshot_before": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\008_Indication_button_before.png",
+  "screenshot_after": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\009_Indication_button_after.png",
+  "element_description": "Indication button"
+}

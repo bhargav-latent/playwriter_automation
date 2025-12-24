@@ -1,0 +1,51 @@
+{
+  "selector": "#ft_pp",
+  "new_elements_count": 28,
+  "revealed_links": [
+    {
+      "text": "1-800-FDA-1088",
+      "href": "tel:1-800-332-1088"
+    },
+    {
+      "text": "full Prescribing Information",
+      "href": "https://labeling.pfizer.com/ShowLabeling.aspx?id=20632"
+    },
+    {
+      "text": "Medication Guide",
+      "href": "https://labeling.pfizer.com/ShowLabeling.aspx?id=20632&Section=MedGuide"
+    },
+    {
+      "text": "Terms of Use",
+      "href": "https://webfiles.pfizer.com/Seagen_Terms_and_Conditions.pdf"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "\t\n                            https://webfiles.pfizer.com/Seagen_Privacy_Policy.pdf"
+    },
+    {
+      "text": "Sitemap",
+      "href": "/sitemap/"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://www.pfizer.com/contact"
+    },
+    {
+      "text": "",
+      "href": "https://www.pfizer.com/"
+    },
+    {
+      "text": "",
+      "href": "https://www.genmab.com/"
+    }
+  ],
+  "behavior": "dropdown",
+  "new_element_types": [
+    "A",
+    "LI",
+    "UL"
+  ],
+  "screenshot_before": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\024_Privacy_Policy_link_before.png",
+  "screenshot_after": "output\\62be67bc-d2fa-4f24-acd1-be959f7d3c7a\\screenshots\\025_Privacy_Policy_link_after.png",
+  "element_description": "Privacy Policy link"
+}
